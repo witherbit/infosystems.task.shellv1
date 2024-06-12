@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="infosystems.task.shellv1.Controls.GroupControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:infosystems.task.shellv1.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="800" Background="#ababab">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Default" Foreground="#1f1f1f" FontFamily="Arial" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15 0 5 0" Name="uiTextBlock"/>
+
+        <Border Margin="5" Background="#1f1f1f" Height="30" Width="30" CornerRadius="100" Grid.Column="1" x:Name="uiEdit" ToolTip="Редактировать группу" MouseEnter="uiEdit_MouseEnter" MouseLeave="uiEdit_MouseLeave" MouseLeftButtonDown="uiEdit_MouseLeftButtonDown" MouseLeftButtonUp="uiEdit_MouseLeftButtonUp">
+            <Path
+                x:Name="uiEditIcon"
+                 Width="20"
+                 Height="20"
+                 Data="M 14 1 L 6 12 L 6 16 L 10 14 L 17 3 M 7.7 12 L 14 3 M 8.5 12.5 L 14 4 M 9 13 L 15 4 M 13 3 L 16 4 M 6.5 11 L 10 12.5"
+                 Stroke="White"
+                 StrokeThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Border>
+        <Border Margin="5" Background="#1f1f1f" Height="30" Width="30" CornerRadius="100" Grid.Column="2" x:Name="uiDelete" ToolTip="Удалить группу" MouseEnter="uiEdit_MouseEnter" MouseLeave="uiEdit_MouseLeave" MouseLeftButtonDown="uiEdit_MouseLeftButtonDown" MouseLeftButtonUp="uiEdit_MouseLeftButtonUp">
+            <Path
+                x:Name="uiDeleteIcon"
+                 Width="20"
+                 Height="20"
+                 Data="M 4 5 L 16 5 M 7 5 C 7 2 8 2 9 2 M 13 5 C 13 2 12 2 11 2 L 9 2 M 5 8 L 5 15 C 5 16 6 17 7 17 L 13 17 C 14 17 15 16 15 15 L 15 8"
+                 Stroke="White"
+                 StrokeThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,23 @@
+﻿<Window x:Class="infosystems.task.shellv1.Windows.AddNewGroupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:infosystems.task.shellv1.Windows"
+        xmlns:controls="clr-namespace:wcheck.wcontrols;assembly=wcheck"
+        mc:Ignorable="d"
+        Title="Создание группы" Height="110" Width="250" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <controls:WTextBox Name="uiTextBox" Grid.Column="0" Grid.ColumnSpan="2" PlaceHolder="Имя группы" FontFamily="Arial" Height="40" Margin="10 10 10 5"/>
+        <Button Foreground="#1f1f1f" Grid.Column="0" Grid.Row="1" FontFamily="Arial Black" Content="Сохранить" Margin="10 5 5 10" Click="Button_Click" IsDefault="True"/>
+        <Button Foreground="#1f1f1f" Grid.Column="1" Grid.Row="1" FontFamily="Arial Black" Content="Отмена" Margin="5 5 10 10" Click="Button_Click_1" IsCancel="True"/>
+    </Grid>
+</Window>
