@@ -2,6 +2,7 @@
 using infosystems.task.shellv1.Controls;
 using infosystems.task.shellv1.Enums;
 using infosystems.task.shellv1.Objects;
+using infosystems.task.shellv1.Pages;
 using infosystems.task.shellv1.Windows;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace infosystems.task.shellv1
         private static Dictionary<string, GroupControl> _groups = new Dictionary<string, GroupControl>();
         private static List<Host> _hosts = new List<Host>();
 
+        public static TaskPage TaskPage { get; internal set; }
         public static int HostsCount => _hosts.Count;
 
         public static ISType ISType { get; set; } = ISType.GIS;
@@ -136,6 +138,7 @@ namespace infosystems.task.shellv1
             ISType = ISType.GIS;
             _groups.Clear();
             _hosts.Clear();
+            TaskPage = null;
         }
     }
 }

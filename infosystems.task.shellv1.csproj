@@ -11,8 +11,4 @@
     <ProjectReference Include="..\wcheck\wcheck.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Forms\" />
-  </ItemGroup>
-
 </Project>

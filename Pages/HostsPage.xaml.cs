@@ -359,15 +359,10 @@ namespace infosystems.task.shellv1.Pages
                 return;
             }
 
-            var i = MainPage.Shell.Shells.FirstOrDefault(x => x.ShellInfo.Id.ToString() == "ee3de59e-00e8-40e9-bfcd-cba116b9a81d");
-            i.Run();
-            var j = MainPage.Shell.Shells.FirstOrDefault(x => x.ShellInfo.Id.ToString() == "4f1fc6ba-56b0-4844-8e2a-485578e8bc1f");
-            j.Run();
+            var scap = MainPage.Shell.Shells.FirstOrDefault(x => x.ShellInfo.Id.ToString() == "ee3de59e-00e8-40e9-bfcd-cba116b9a81d");
+            var nmap = MainPage.Shell.Shells.FirstOrDefault(x => x.ShellInfo.Id.ToString() == "4f1fc6ba-56b0-4844-8e2a-485578e8bc1f");
 
-            MainPage.Shell.InvokeTabFocus(MainPage.Shell.Page);
-
-            MainPage.Shell.InvokeStartTaskView("ee3de59e-00e8-40e9-bfcd-cba116b9a81d");
-            MainPage.Shell.InvokeStartTaskView("4f1fc6ba-56b0-4844-8e2a-485578e8bc1f");
+            MainPage.Shell.Page.uiFrame.Content = new TaskPage(nmap, scap);
         }
     }
 }
