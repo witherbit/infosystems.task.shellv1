@@ -20,6 +20,7 @@ namespace infosystems.task.shellv1
         public static Group DefaultGroup = new Group("default");
         private static Dictionary<string, GroupControl> _groups = new Dictionary<string, GroupControl>();
         private static List<Host> _hosts = new List<Host>();
+        private static List<HostTaskControl> _tasks = new List<HostTaskControl>();
 
         public static TaskPage TaskPage { get; internal set; }
         public static int HostsCount => _hosts.Count;
@@ -29,6 +30,25 @@ namespace infosystems.task.shellv1
         public static void AddGroup(GroupControl control)
         {
             _groups.Add(control.Group.Name, control);
+        }
+
+        public static string AddHostTask(HostTaskControl hostTaskControl)
+        {
+            _tasks.Add(hostTaskControl);
+            return hostTaskControl.TaskId;
+        }
+
+        public static HostTaskControl GetHostTask(string taskId)
+        {
+            return _tasks.FirstOrDefault(x => x.TaskId == taskId);
+        }
+
+        public static void ActivateHostTasks()
+        {
+            foreach(var h in _tasks)
+            {
+                h.StartTask();
+            }
         }
 
         public static bool ExistGroup(string name)

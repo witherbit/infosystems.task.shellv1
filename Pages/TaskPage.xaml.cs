@@ -42,9 +42,11 @@ namespace infosystems.task.shellv1.Pages
         public ShellBase NmapShell { get; }
         public ShellOutputRedirect ScapRedirect { get; }
         public ShellOutputRedirect NmapRedirect { get; }
+        public CancellationTokenSource CancellationTokenSource { get; }
         public TaskPage(ShellBase nmapShell, ShellBase scapShell)
         {
             InitializeComponent();
+            CancellationTokenSource = new CancellationTokenSource();
             switch (TaskController.ISType)
             {
                 case Enums.ISType.GIS:
@@ -78,6 +80,43 @@ namespace infosystems.task.shellv1.Pages
 
             MainPage.Shell.InvokeStartTaskView("ee3de59e-00e8-40e9-bfcd-cba116b9a81d");
             MainPage.Shell.InvokeStartTaskView("4f1fc6ba-56b0-4844-8e2a-485578e8bc1f");
+
+
+            foreach (var h in TaskController.GetHosts())
+            {
+                if (h.TargetIp == "localhost" || h.TargetIp == "127.0.0.1")
+                    continue;
+                if (h.Group == TaskController.DefaultGroup)
+                {
+                    var taskHost = new HostTaskControl(h, MainPage.Shell, CancellationTokenSource.Token)
+                    {
+                        Margin = new Thickness(5, 5, 5, 0)
+                    };
+                    TaskController.AddHostTask(taskHost);
+                    uiHosts.Children.Add(taskHost);
+                }
+            }
+                
+
+            foreach(var g in TaskController.GetGroups())
+            {
+                foreach (var h in TaskController.GetHosts())
+                {
+                    if (h.TargetIp == "localhost" || h.TargetIp == "127.0.0.1")
+                        continue;
+                    if (h.Group == g)
+                    {
+                        var taskHost = new HostTaskControl(h, MainPage.Shell, CancellationTokenSource.Token)
+                        {
+                            Margin = new Thickness(5, 5, 5, 0)
+                        };
+                        TaskController.AddHostTask(taskHost);
+                        uiHosts.Children.Add(taskHost);
+                    }
+                }
+            }
+
+            TaskController.ActivateHostTasks();
         }
 
         private void OnNmapOutput(string obj)

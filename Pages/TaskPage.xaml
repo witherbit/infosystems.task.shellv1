@@ -74,9 +74,6 @@ HorizontalAlignment="Right" Margin="5"/>
                             <RowDefinition Height="1"/>
                             <RowDefinition/>
                             <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.ColumnSpan="2" Text="Компонент задачи: Nmap" FontFamily="Arial Black"
 Foreground="#1f1f1f"
@@ -117,6 +114,11 @@ Margin="10 10 5 10" Background="#dfdfdf">
                 <RowDefinition Height="1"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
+                <StackPanel x:Name="uiHosts"/>
+            </ScrollViewer>
+            
             <Grid Grid.Row="1" Background="#4c4c4c" Margin="10 0"/>
 
             <TextBlock Grid.Row="2" Text="Статистика хостов" FontFamily="Arial"

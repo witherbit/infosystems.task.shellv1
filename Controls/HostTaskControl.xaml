@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="infosystems.task.shellv1.Controls.HostTaskControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:infosystems.task.shellv1.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="365">
+    <Border Background="#bbbbbb" CornerRadius="5">
+        <Grid>
+
+            <Expander VerticalAlignment="Top" Margin="5">
+                <Expander.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" x:Name="uiTitle" Text="Host [group]" FontFamily="Arial Black" HorizontalAlignment="Left"
+Foreground="#1f1f1f" Margin="5"/>
+                        <Ellipse Grid.Column="0" x:Name="uiLed" Fill="#a6ff63" Stroke="#1f1f1f" Height="10" Width="10"/>
+                    </Grid>
+                </Expander.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.ColumnSpan="2" Height="1" Background="#1f1f1f" Margin="5 0 0 0"/>
+                    <TextBlock Grid.Row="1" Text="Состояние:" FontFamily="Arial"
+Foreground="#1f1f1f"
+VerticalAlignment="Center"
+HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Name="uiState" Grid.Row="1" Grid.Column="1" Text="null" FontFamily="Arial"
+Foreground="#1f1f1f"
+VerticalAlignment="Center"
+HorizontalAlignment="Right" Margin="5"/>
+                    <Border Grid.Row="2" Grid.ColumnSpan="3" Background="#1f1f1f" CornerRadius="10" Height="45" Margin="5 0 5 5">
+                        <TextBox x:Name="uiOutput" Text="null" BorderThickness="0" IsReadOnly="True" TextWrapping="WrapWithOverflow" Foreground="GreenYellow" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" FontFamily="Cascadia Code"/>
+                    </Border>
+                </Grid>
+            </Expander>
+        </Grid>
+    </Border>
+</UserControl>

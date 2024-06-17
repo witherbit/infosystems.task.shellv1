@@ -14,6 +14,7 @@ using wcheck.wshell.Objects;
 using wshell.Abstract;
 using wshell.Enums;
 using wshell.Net;
+using wshell.Net.Nodes;
 using wshell.Objects;
 
 namespace infosystems.task.shellv1
@@ -50,6 +51,21 @@ namespace infosystems.task.shellv1
                     if (HostsPage.Instance != null)
                         HostsPage.Instance.OnShellsPropertyChanged();
                     return new Schema(CallbackType.EmptyResponse);
+                case CallbackType.RedirectNetRequest:
+                    var node = schema.GetProviding<Node>();
+                    if (node.GetAttribute("type") == "task state")
+                    {
+                        TaskController.GetHostTask(node.GetAttribute("task id")).SetState(node.Child as string);
+                    }
+                    else if (node.GetAttribute("type") == "task complete")
+                    {
+                        TaskController.GetHostTask(node.GetAttribute("task id")).SetComplete();
+                    }
+                    else if (node.GetAttribute("type") == "task output")
+                    {
+                        TaskController.GetHostTask(node.GetAttribute("task id")).SetOutput(node.Child as string);
+                    }
+                    return new Schema(CallbackType.RedirectNetResponse).SetProviding(new Node());
                 case CallbackType.CustomRequest:
 
                     if(schema.GetProvidingType() == typeof(string))
