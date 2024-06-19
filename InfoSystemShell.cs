@@ -1,13 +1,17 @@
-﻿using infosystems.task.shellv1.Pages;
+﻿using infosystems.task.shellv1.Objects;
+using infosystems.task.shellv1.Pages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using wcheck;
+using wcheck.Statistic.Templates;
+using wcheck.Utils;
 using wcheck.wcontrols;
 using wcheck.wshell.Enums;
 using wcheck.wshell.Objects;
@@ -36,6 +40,8 @@ namespace infosystems.task.shellv1
         public ShellInfo[] ShellInfos { get; private set; }
         internal List<ShellBase> Shells { get; private set; }
 
+        int isb = 0;
+
         public InfoSystemShell() : base(new ShellInfo("Тестирование ИС", "1.0.0", new Guid("b4877dc5-a5b5-4b7e-b08b-1b1995e8c8d8"), ShellType.Task, "Задача определения соответствия ИСПДн заданному уроню защищенности", "Артем И.С."))
         {
             Settings = ShellSettings.Load(ShellInfo.Id.ToString(), new List<SettingsObject>
@@ -59,7 +65,7 @@ namespace infosystems.task.shellv1
                     }
                     else if (node.GetAttribute("type") == "task complete")
                     {
-                        TaskController.GetHostTask(node.GetAttribute("task id")).SetComplete();
+                        TaskController.GetHostTask(node.GetAttribute("task id")).SetComplete(node.GetAttribute("content id"), int.Parse(node.GetAttribute("content count")), node.GetAttribute("from"));
                     }
                     else if (node.GetAttribute("type") == "task output")
                     {

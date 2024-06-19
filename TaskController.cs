@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using wcheck.Statistic.Items;
+using wcheck.Statistic.Templates;
 using wshell.Enums;
 
 namespace infosystems.task.shellv1
@@ -21,6 +22,19 @@ namespace infosystems.task.shellv1
         private static Dictionary<string, GroupControl> _groups = new Dictionary<string, GroupControl>();
         private static List<Host> _hosts = new List<Host>();
         private static List<HostTaskControl> _tasks = new List<HostTaskControl>();
+        private static List<IStatisticTemplate> _hostsTemplates = new List<IStatisticTemplate>();
+        internal static IStatisticTemplate? ScapTemplate { get; set; }
+        internal static IStatisticTemplate? NmapTemplate { get; set; }
+
+        public static void AddTemplate(IStatisticTemplate template)
+        {
+                _hostsTemplates.Add(template);
+        }
+
+        public static IStatisticTemplate[] GetHostTemplates()
+        {
+            return _hostsTemplates.ToArray();
+        }
 
         public static TaskPage TaskPage { get; internal set; }
         public static int HostsCount => _hosts.Count;
@@ -157,6 +171,10 @@ namespace infosystems.task.shellv1
         {
             ISType = ISType.GIS;
             _groups.Clear();
+            _hosts.Clear();
+            _hostsTemplates.Clear();
+            ScapTemplate = null;
+            NmapTemplate = null;
             _hosts.Clear();
             TaskPage = null;
         }

@@ -18,7 +18,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="1" x:Name="uiTitle" Text="Host [group]" FontFamily="Arial Black" HorizontalAlignment="Left"
 Foreground="#1f1f1f" Margin="5"/>
-                        <Ellipse Grid.Column="0" x:Name="uiLed" Fill="#a6ff63" Stroke="#1f1f1f" Height="10" Width="10"/>
+                        <Ellipse Grid.Column="0" x:Name="uiLed" Fill="#fffd7d" Stroke="#1f1f1f" Height="10" Width="10"/>
                     </Grid>
                 </Expander.Header>
                 <Grid>

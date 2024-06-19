@@ -52,47 +52,50 @@ namespace infosystems.task.shellv1.Forms.Tests
 
         private string GetFederalSecClass(int significanceLevel)
         {
+            var start = "Определенный, в результате опросного метода, предполагаемый уровень (класс) защищенности ГИС для федерального назначения: ";
             if(significanceLevel == 1)
             {
-                return $"К1";
+                return $"{start}К1";
             }
             else if(significanceLevel == 2)
             {
-                return $"К1";
+                return $"{start}К1";
             }
             else
             {
-                return $"К2";
+                return $"{start}К2";
             }
         }
         private string GetRegionSecClass(int significanceLevel)
         {
+            var start = "Определенный, в результате опросного метода, предполагаемый уровень (класс) защищенности ГИС для регионального назначения: ";
             if (significanceLevel == 1)
             {
-                return $"К1";
+                return $"{start}К1";
             }
             else if (significanceLevel == 2)
             {
-                return $"К2";
+                return $"{start}К2";
             }
             else
             {
-                return $"К3";
+                return $"{start}К3";
             }
         }
         private string GetObjectSecClass(int significanceLevel)
         {
+            var start = "Определенный, в результате опросного метода, предполагаемый уровень (класс) защищенности ГИС для объектового назначения: ";
             if (significanceLevel == 1)
             {
-                return $"К1";
+                return $"{start}К1";
             }
             else if (significanceLevel == 2)
             {
-                return $"К2";
+                return $"{start}К2";
             }
             else
             {
-                return $"К3";
+                return $"{start}К3";
             }
         }
     }

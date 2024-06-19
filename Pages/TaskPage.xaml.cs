@@ -1,4 +1,5 @@
 ﻿using infosystems.task.shellv1.Controls;
+using infosystems.task.shellv1.Enums;
 using infosystems.task.shellv1.Forms.Abstract;
 using infosystems.task.shellv1.Forms.Tests;
 using infosystems.task.shellv1.Objects;
@@ -16,8 +17,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wcheck;
+using wcheck.Pages;
+using wcheck.Statistic;
+using wcheck.Statistic.Nodes;
+using wcheck.Statistic.Styles;
 using wcheck.Statistic.Templates;
 using wcheck.wcontrols;
+using wcheck.wshell.Enums;
+using wcheck.wshell.Objects;
 using wshell.Abstract;
 using wshell.Utils;
 
@@ -54,6 +62,14 @@ namespace infosystems.task.shellv1.Pages
                     uiButtonNext.IsEnabled = true;
                     foreach (var item in Forms.TestElements)
                         _navigationControls.Add(new TestingControl(item) { Margin = new Thickness(10)});
+                    uiTextFormsCount.Text = $"{_navigationCurrent}/{_navigationMax}";
+                    SetNavigationForms();
+                    break;
+                case Enums.ISType.ISPD:
+                    Forms = new IspdTest();
+                    uiButtonNext.IsEnabled = true;
+                    foreach (var item in Forms.TestElements)
+                        _navigationControls.Add(new TestingControl(item) { Margin = new Thickness(10) });
                     uiTextFormsCount.Text = $"{_navigationCurrent}/{_navigationMax}";
                     SetNavigationForms();
                     break;
@@ -163,6 +179,7 @@ namespace infosystems.task.shellv1.Pages
 
         private void OnNmapComplete(IStatisticTemplate template)
         {
+            TaskController.NmapTemplate = template;
             this.Invoke(() =>
             {
                 uiLedNmap.Fill = _inComplete;
@@ -172,11 +189,11 @@ namespace infosystems.task.shellv1.Pages
 
         private void OnScapComplete(IStatisticTemplate template)
         {
+            TaskController.ScapTemplate = template;
             this.Invoke(() =>
             {
                 uiLedScap.Fill = _inComplete;
                 uiOutputScap.Text = "Completed";
-                MessageBox.Show(Forms.GetResult());
             });
         }
 
@@ -215,6 +232,49 @@ namespace infosystems.task.shellv1.Pages
             {
                 uiButtonBack.IsEnabled = false;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var engine = new StatisticEngine();
+            engine.InsertTemplate(new ISTaskTemplate(TaskController.ISType, Forms.GetResult()));
+            engine.InsertTemplate(TaskController.NmapTemplate);
+            engine.InsertTemplate(TaskController.ScapTemplate);
+            foreach (var template in TaskController.GetHostTemplates())
+            {
+                engine.InsertTemplate(template);
+            }
+            engine.Nodes.Add(new BreakStatisticNode());
+            engine.Nodes.Add(new TextStatisticNode($"Сгенерировано с помощью ПО witherbit wcheck", new TextNodeStyle
+            {
+                Aligment = wcheck.Statistic.Enums.TextAligment.Right,
+                FontSize = 10,
+                WpfFontSize = 12,
+                IsItalic = true,
+            }));
+            engine.Nodes.Add(new TextStatisticNode($"Версия: {SettingsParamConsts.Build}{SettingsParamConsts.BuildType}", new TextNodeStyle
+            {
+                    Aligment = wcheck.Statistic.Enums.TextAligment.Right,
+                    FontSize = 10,
+                    WpfFontSize = 12,
+                    IsItalic = true,
+                }));
+            engine.Nodes.Add(new TextStatisticNode(
+                $"Автор: {SettingsParamConsts.Company} - {SettingsParamConsts.Author}", new TextNodeStyle
+                {
+                    Aligment = wcheck.Statistic.Enums.TextAligment.Right,
+                    FontSize = 10,
+                    WpfFontSize = 12,
+                    IsItalic = true,
+                }));
+            engine.Nodes.Add(new TextStatisticNode($"Обратная связь: {SettingsParamConsts.Support}", new TextNodeStyle
+                {
+                    Aligment = wcheck.Statistic.Enums.TextAligment.Right,
+                    FontSize = 10,
+                    WpfFontSize = 12,
+                    IsItalic = true,
+                }));
+            MainPage.Shell.Callback.Invoke(MainPage.Shell, new Schema(CallbackType.RegisterPage).SetProviding(new StatisticPage(engine)));
         }
     }
 }
