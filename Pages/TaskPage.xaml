@@ -30,7 +30,7 @@
                 <Border Margin="10 10 10 5" Background="#bbbbbb" CornerRadius="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
@@ -65,7 +65,7 @@ HorizontalAlignment="Right" Margin="5"/>
                 <Border Margin="10 0 10 5" Background="#bbbbbb" CornerRadius="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>

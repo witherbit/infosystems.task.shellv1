@@ -73,6 +73,14 @@ namespace infosystems.task.shellv1.Pages
                     uiTextFormsCount.Text = $"{_navigationCurrent}/{_navigationMax}";
                     SetNavigationForms();
                     break;
+                case Enums.ISType.AS:
+                    Forms = new ASTest();
+                    uiButtonNext.IsEnabled = true;
+                    foreach (var item in Forms.TestElements)
+                        _navigationControls.Add(new TestingControl(item) { Margin = new Thickness(10) });
+                    uiTextFormsCount.Text = $"{_navigationCurrent}/{_navigationMax}";
+                    SetNavigationForms();
+                    break;
             }
             NmapShell = nmapShell;
             ScapShell = scapShell;
@@ -234,8 +242,32 @@ namespace infosystems.task.shellv1.Pages
             }
         }
 
+        private bool CheckQestionsComplete()
+        {
+            var arr = Forms.TestElements.ToArray();
+            int count = 0;
+            foreach (var item in arr)
+            {
+                if(item.SelectedAnswer > -1)
+                    count++;
+            }
+            if (count == arr.Length)
+                return true;
+            return false;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (TaskController.NmapTemplate == null || TaskController.ScapTemplate == null)
+            {
+                MessageBox.Show($"Невозможно перейти к отчету:\r\nОдин или несколько модулей не закончили свою работу", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (!CheckQestionsComplete())
+            {
+                MessageBox.Show($"Невозможно перейти к отчету:\r\nОпрос не пройден", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             var engine = new StatisticEngine();
             engine.InsertTemplate(new ISTaskTemplate(TaskController.ISType, Forms.GetResult()));
             engine.InsertTemplate(TaskController.NmapTemplate);

@@ -28,7 +28,7 @@ Foreground="#1f1f1f" Margin="5"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Row="0" Grid.ColumnSpan="2" Height="1" Background="#1f1f1f" Margin="5 0 0 0"/>
